@@ -1,0 +1,16 @@
+{
+  "app": {
+    "title": "Compass"
+  },
+  "compass": {
+    "heading": "{{deg}}°",
+    "calibrating": "Low accuracy — wave the phone in a figure 8",
+    "simulated": "Simulation mode (no sensor)",
+    "levelHint": "Hold the phone flat for best results",
+    "accuracy": "Accuracy: {{level}}"
+  },
+  "settings": {
+    "language": "Language",
+    "trueNorth": "True north (soon)"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "app": {
+    "title": "Pusula"
+  },
+  "compass": {
+    "heading": "{{deg}}°",
+    "calibrating": "Doğruluk düşük — telefonu 8 çizer gibi sallayın",
+    "simulated": "Simülasyon modu (sensör yok)",
+    "levelHint": "En iyi sonuç için telefonu düz tutun",
+    "accuracy": "Doğruluk: {{level}}"
+  },
+  "settings": {
+    "language": "Dil",
+    "trueNorth": "Gerçek kuzey (yakında)"
+  }
+}

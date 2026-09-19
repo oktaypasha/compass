@@ -1,0 +1,12 @@
+# Pusula akış testi — Maestro (kablolu: `maestro test .maestro/compass.yml`)
+appId: com.pusula.compass
+---
+- launchApp
+- assertVisible: "Pusula"
+- assertVisible: ".*°"
+- takeScreenshot: compass-launch
+- tapOn: "EN"
+- assertVisible: "Compass"
+- takeScreenshot: compass-en
+- tapOn: "TR"
+- assertVisible: "Pusula"
