@@ -1,16 +1,31 @@
 {
   "expo": {
-    "name": "Pusula",
+    "name": "Mergen Compass",
     "slug": "pusula-compass",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
+    "runtimeVersion": "1.0.0",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pusula.compass",
+      "buildNumber": "1",
+      "icon": "./assets/icon.png",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Gerçek kuzey sapmasını hesaplamak ve açık adresi göstermek için konum kullanılır. / Location is used to compute the true-north declination and to show your address.",
+        "NSMotionUsageDescription": "Pusula yönünü hesaplamak için cihaz hareketi ve manyetometre kullanılır. / Device motion and the magnetometer are used to compute the compass heading.",
+        "NSMotionAndMagneticFieldUsageDescription": "Pusula yönünü hesaplamak için manyetik alan ölçülür. / The magnetic field is measured to compute the compass heading."
+      }
     },
     "android": {
       "package": "com.pusula.compass",
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "android.permission.HIGH_SAMPLING_RATE_SENSORS"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",

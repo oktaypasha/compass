@@ -1,0 +1,88 @@
+{
+  "app": {
+    "title": "Mergen Compass"
+  },
+  "menu": {
+    "open": "Menü öffnen",
+    "compass": "Kompass",
+    "settings": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Design",
+    "privacy": "Datenschutzerklärung",
+    "terms": "Nutzungsbedingungen",
+    "close": "Menü schließen"
+  },
+  "theme": {
+    "system": "System",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "demoMode": "Demo-Modus",
+    "demoModeHint": "Zeigt nur zu Demonstrationszwecken eine simulierte Richtung. Solange aktiv, sind echte Kompasswerte aus.",
+    "demoOn": "Ein",
+    "demoOff": "Aus",
+    "northReference": "Nordreferenz",
+    "northMagnetic": "Magnetisch Nord",
+    "northTrue": "Wahre Nord",
+    "northHint": "Wahre Nord addiert die örtliche magnetische Deklination. Dafür wird der Standort gebraucht; sonst bitte unten von Hand eintragen.",
+    "offsetTitle": "Magnetischer Versatz (Gerätefehler)",
+    "offsetHint": "Korrigiert den Magnetometerfehler des Telefons. Acht-Figur schwenken, mit einer Kompass ausrichten und hier nachstellen.",
+    "declinationTitle": "Deklination (wahre Nord)",
+    "declinationAuto": "Automatische Deklination: {{value}} — manueller Wert nicht verwendet.",
+    "declinationManualHint": "Ohne Standort bitte von Hand eintragen. Die Türkei liegt etwa +4…+7° östlich.",
+    "reset": "Zurücksetzen",
+    "version": "Version {{version}}"
+  },
+  "sun": {
+    "sunrise": "Sonnenaufgang",
+    "sunset": "Sonnenuntergang"
+  },
+  "location": {
+    "locating": "Standort wird ermittelt…",
+    "denied": "Standortberechtigung verweigert",
+    "unavailable": "Kein Standort ermittelbar — bitte im Freien versuchen",
+    "waiting": "Warten auf den Standort…",
+    "retry": "Erneut versuchen",
+    "share": "Standort teilen",
+    "shareTitle": "Standort",
+    "openMap": "In Karte öffnen"
+  },
+  "compass": {
+    "simulated": "DEMO-MODUS — simulierte Richtung, keine echte Messung",
+    "noMagnetometerTitle": "Dieses Gerät hat keinen Kompass",
+    "noMagnetometerBody": "Dieses Telefon hat keinen Magnetometer und kann daher keine Richtung messen. Das ist eine Hardware-Einschränkung, kein App-Fehler.",
+    "noMagnetometerStillWorks": "Die Wasserwaage sowie Standort und Sonnenauf-/untergang funktionieren weiterhin.",
+    "levelHint": "Telefon flach halten für beste Ergebnisse",
+    "accuracy": "Genauigkeit: {{level}}",
+    "declination": "Deklination: {{value}}",
+    "declinationEast": "{{value}}°O",
+    "declinationWest": "{{value}}°W",
+    "declinationNoFix": "Wahre Nord benötigt einen Standort",
+    "declinationCached": " (zuletzt bekannt)",
+    "interference": "Magnetische Störung — bitte von Metall und Magneten entfernen",
+    "suspectField": "Feld schwach oder stark — die Anzeige kann abweichen",
+    "sourceSystem": "Systemsensor",
+    "sourceManual": "App-Fusion",
+    "figureEight": "Kalibrieren: eine Acht-Figur schwenken",
+    "bubbleLevel": "Libelle",
+    "poseFlat": "Haltung: flach",
+    "poseUpright": "Haltung: aufrecht",
+    "directions": {
+      "n": "Norden",
+      "ne": "Nordosten",
+      "e": "Osten",
+      "se": "Südosten",
+      "s": "Süden",
+      "sw": "Südwesten",
+      "w": "Westen",
+      "nw": "Nordwesten"
+    }
+  },
+  "legal": {
+    "privacyTitle": "Datenschutzerklärung",
+    "termsTitle": "Nutzungsbedingungen",
+    "pending": "Hier wird bald ein Vertrag hinzugefügt."
+  }
+}

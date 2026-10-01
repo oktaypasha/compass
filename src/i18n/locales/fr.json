@@ -1,0 +1,88 @@
+{
+  "app": {
+    "title": "Mergen Compass"
+  },
+  "menu": {
+    "open": "Ouvrir le menu",
+    "compass": "Boussole",
+    "settings": "Réglages",
+    "language": "Langue",
+    "theme": "Thème",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions générales",
+    "close": "Fermer le menu"
+  },
+  "theme": {
+    "system": "Système",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "settings": {
+    "title": "Réglages",
+    "demoMode": "Mode démo",
+    "demoModeHint": "Affiche une direction simulée à titre de démonstration uniquement. Les mesures réelles sont suspendues lorsque cette option est active.",
+    "demoOn": "Activé",
+    "demoOff": "Désactivé",
+    "northReference": "Référence nord",
+    "northMagnetic": "Nord magnétique",
+    "northTrue": "Nord vrai",
+    "northHint": "Le nord vrai ajoute la déclinaison magnétique locale. Il faut la position ; sinon saisissez-la à la main ci-dessous.",
+    "offsetTitle": "Décalage magnétique (biais de l'appareil)",
+    "offsetHint": "Corrige le biais du magnétomètre du téléphone. Faites un huit, alignez sur une boussole, puis ajustez ici.",
+    "declinationTitle": "Déclinaison (nord vrai)",
+    "declinationAuto": "Déclinaison automatique : {{value}} — valeur manuelle inutilisée.",
+    "declinationManualHint": "Sans position, saisissez-la à la main. La Turquie est vers +4…+7° à l'est.",
+    "reset": "Réinitialiser",
+    "version": "Version {{version}}"
+  },
+  "sun": {
+    "sunrise": "Lever du soleil",
+    "sunset": "Coucher du soleil"
+  },
+  "location": {
+    "locating": "Localisation en cours…",
+    "denied": "Autorisation de localisation refusée",
+    "unavailable": "Aucune position : essayez en extérieur",
+    "waiting": "En attente de la position…",
+    "retry": "Réessayer",
+    "share": "Partager la position",
+    "shareTitle": "Position",
+    "openMap": "Ouvrir dans la carte"
+  },
+  "compass": {
+    "simulated": "MODE DÉMO (DEMO) — direction simulée, ce n\u0027est pas une mesure réelle",
+    "noMagnetometerTitle": "Aucun compas sur cet appareil",
+    "noMagnetometerBody": "Ce téléphone n\u0027a pas de magnétomètre, il ne peut donc pas mesurer la direction. Il s\u0027agit d\u0027une limite matérielle, pas d\u0027une erreur de l\u0027application.",
+    "noMagnetometerStillWorks": "Le niveau, la position et le lever/coucher du soleil fonctionnent toujours.",
+    "levelHint": "Gardez le téléphone à plat pour de meilleurs résultats",
+    "accuracy": "Précision : {{level}}",
+    "declination": "Déclinaison : {{value}}",
+    "declinationEast": "{{value}}°E",
+    "declinationWest": "{{value}}°O",
+    "declinationNoFix": "Le nord vrai nécessite une position",
+    "declinationCached": " (dernier connu)",
+    "interference": "Interférence magnétique — éloignez-vous des métaux et des aimants",
+    "suspectField": "Champ faible ou fort : la lecture peut dériver",
+    "sourceSystem": "Capteur système",
+    "sourceManual": "Fusion interne",
+    "figureEight": "Étalonnez en dessinant un huit",
+    "bubbleLevel": "Niveau à bulle",
+    "poseFlat": "Prise : à plat",
+    "poseUpright": "Prise : verticale",
+    "directions": {
+      "n": "Nord",
+      "ne": "Nord-Est",
+      "e": "Est",
+      "se": "Sud-Est",
+      "s": "Sud",
+      "sw": "Sud-Ouest",
+      "w": "Ouest",
+      "nw": "Nord-Ouest"
+    }
+  },
+  "legal": {
+    "privacyTitle": "Politique de confidentialité",
+    "termsTitle": "Conditions générales",
+    "pending": "Un contrat sera bientôt ajouté ici."
+  }
+}

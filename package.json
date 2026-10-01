@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {
-    "expo": "~57.0.24",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "~57.0.26",
     "expo-haptics": "~57.0.3",
     "expo-localization": "~57.0.2",
+    "expo-location": "~57.0.20",
     "expo-sensors": "~57.0.3",
     "expo-status-bar": "~57.0.1",
     "expo-system-ui": "~57.0.4",
@@ -17,6 +19,7 @@
     "react-native": "0.86.3",
     "react-native-gesture-handler": "~2.32.0",
     "react-native-reanimated": "4.5.1",
+    "react-native-safe-area-context": "~5.7.0",
     "react-native-svg": "15.15.4",
     "react-native-worklets": "0.10.1"
   },
@@ -39,7 +42,15 @@
     "doctor": "expo-doctor"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ]
   },
-  "private": true
+  "private": true,
+  "expo": {
+    "autolinking": {
+      "nativeModulesDir": "./modules"
+    }
+  }
 }

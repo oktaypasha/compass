@@ -1,0 +1,88 @@
+{
+  "app": {
+    "title": "Mergen Compass"
+  },
+  "menu": {
+    "open": "Buka menu",
+    "compass": "Kompas",
+    "settings": "Pengaturan",
+    "language": "Bahasa",
+    "theme": "Tema",
+    "privacy": "Kebijakan Privasi",
+    "terms": "Ketentuan dan Ketentuan",
+    "close": "Tutup menu"
+  },
+  "theme": {
+    "system": "Sistem",
+    "light": "Terang",
+    "dark": "Gelap"
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "demoMode": "Mode demo",
+    "demoModeHint": "Menampilkan arah simulasi hanya untuk demonstrasi. Pembacaan kompas nyata berhenti saat ini aktif.",
+    "demoOn": "Aktif",
+    "demoOff": "Mati",
+    "northReference": "Acuan utara",
+    "northMagnetic": "Utara magnetik",
+    "northTrue": "Utara sejati",
+    "northHint": "Utara sejati menambahkan deklinasi magnetik setempat. Memerlukan lokasi; tanpa itu, isi manual di bawah.",
+    "offsetTitle": "Offset magnetik (bias perangkat)",
+    "offsetHint": "Memperbaiki bias magnetometer ponsel. Gambar angka 8, sejajarkan dengan kompas fisik, lalu sesuaikan di sini.",
+    "declinationTitle": "Deklinasi (utara sejati)",
+    "declinationAuto": "Deklinasi otomatis: {{value}} — nilai manual tidak dipakai.",
+    "declinationManualHint": "Bila tanpa lokasi, isi manual. Türkiye sekitar +4…+7° ke timur.",
+    "reset": "Atur ulang",
+    "version": "Versi {{version}}"
+  },
+  "sun": {
+    "sunrise": "Matahari terbit",
+    "sunset": "Matahari terbenam"
+  },
+  "location": {
+    "locating": "Mendapatkan lokasi…",
+    "denied": "Izin lokasi ditolak",
+    "unavailable": "Tidak ada lokasi — coba di ruang terbuka",
+    "waiting": "Menunggu lokasi…",
+    "retry": "Coba lagi",
+    "share": "Bagikan lokasi",
+    "shareTitle": "Lokasi",
+    "openMap": "Buka di peta"
+  },
+  "compass": {
+    "simulated": "MODE DEMO — arah simulasi, bukan pengukuran nyata",
+    "noMagnetometerTitle": "Perangkat ini tidak punya kompas",
+    "noMagnetometerBody": "Ponsel ini tidak punya magnetometer sehingga tidak dapat mengukur arah. Ini adalah keterbatasan perangkat keras, bukan kesalahan aplikasi.",
+    "noMagnetometerStillWorks": "Level, lokasi, dan matahari terbit/terbenam tetap berfungsi.",
+    "levelHint": "Ponsel datar untuk hasil terbaik",
+    "accuracy": "Akurasi: {{level}}",
+    "declination": "Deklinasi: {{value}}",
+    "declinationEast": "{{value}}°T",
+    "declinationWest": "{{value}}°B",
+    "declinationNoFix": "Utara sejati memerlukan lokasi",
+    "declinationCached": " (terakhir diketahui)",
+    "interference": "Gangguan magnetik — menjauh dari logam dan magnet",
+    "suspectField": "Medan lemah atau kuat — pembacaan bisa bergeser",
+    "sourceSystem": "Sensor sistem",
+    "sourceManual": "Fusi dalam aplikasi",
+    "figureEight": "Kalibrasi dengan menggambar angka 8",
+    "bubbleLevel": "Level gelembung",
+    "poseFlat": "Cengkeraman: datar",
+    "poseUpright": "Cengkeraman: tegak",
+    "directions": {
+      "n": "Utara",
+      "ne": "Timur Laut",
+      "e": "Timur",
+      "se": "Tenggara",
+      "s": "Selatan",
+      "sw": "Barat Daya",
+      "w": "Barat",
+      "nw": "Barat Laut"
+    }
+  },
+  "legal": {
+    "privacyTitle": "Kebijakan Privasi",
+    "termsTitle": "Ketentuan dan Ketentuan",
+    "pending": "Akan ditambahkan sebuah kontrak di sini segera."
+  }
+}

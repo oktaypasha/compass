@@ -1,15 +1,25 @@
 import {
+  applyDeclination,
+  applyUserOffset,
   cardinalIndex,
+  classifyFieldStrength,
+  clampUserOffset,
   complementaryStep,
+  crossedNorth,
   emaAngleRead,
   emaAngleStep,
   createEmaState,
   headingFromMagnetometer,
+  headingFromRotationMatrix,
   isDeviceLevel,
+  isLevelReading,
+  levelFromAccel,
   normalizeAngle,
+  poseStep,
   shortestDelta,
   tiltCompensatedHeading,
   unwrapStep,
+  USER_OFFSET_LIMIT_DEG,
 } from './heading';
 
 describe('normalizeAngle', () => {
@@ -135,5 +145,214 @@ describe('isDeviceLevel', () => {
   it('detects flat vs shaken device', () => {
     expect(isDeviceLevel({ x: 0, y: 0, z: 9.81 })).toBe(true);
     expect(isDeviceLevel({ x: 8, y: 8, z: 8 })).toBe(false);
+  });
+});
+
+describe('applyDeclination', () => {
+  it('adds east-positive declination and wraps', () => {
+    expect(applyDeclination(320, 6)).toBeCloseTo(326);
+    expect(applyDeclination(357, 6)).toBeCloseTo(3);
+    expect(applyDeclination(10, -4)).toBeCloseTo(6);
+  });
+});
+
+describe('classifyFieldStrength', () => {
+  it('accepts the normal earth band', () => {
+    expect(classifyFieldStrength(48, 'normal')).toBe('normal');
+    expect(classifyFieldStrength(30, 'normal')).toBe('normal');
+    expect(classifyFieldStrength(60, 'normal')).toBe('normal');
+  });
+
+  it('flags suspect and interference bands', () => {
+    expect(classifyFieldStrength(22, 'normal')).toBe('suspect');
+    expect(classifyFieldStrength(70, 'normal')).toBe('suspect');
+    expect(classifyFieldStrength(15, 'normal')).toBe('interference');
+    expect(classifyFieldStrength(120, 'suspect')).toBe('interference');
+  });
+
+  it('uses hysteresis: does not flicker at the boundary', () => {
+    // Parazite girildi; 24 µT hâlâ çıkış bandında değil → uyarı sürer.
+    expect(classifyFieldStrength(24, 'interference')).toBe('interference');
+    // 30 µT çıkış bandında → normale döner.
+    expect(classifyFieldStrength(30, 'interference')).toBe('normal');
+    // Şüpheli bantta 24 µT → suspect sürer, parazite düşmez.
+    expect(classifyFieldStrength(24, 'suspect')).toBe('suspect');
+  });
+
+  it('keeps previous state on invalid input', () => {
+    expect(classifyFieldStrength(Number.NaN, 'normal')).toBe('normal');
+  });
+});
+
+describe('levelFromAccel', () => {
+  it('reads zero tilt when flat', () => {
+    const l = levelFromAccel({ x: 0, y: 0, z: 9.81 });
+    expect(l.pitchDeg).toBeCloseTo(0);
+    expect(l.rollDeg).toBeCloseTo(0);
+    expect(l.bubbleX).toBeCloseTo(0);
+    expect(l.bubbleY).toBeCloseTo(0);
+  });
+
+  it('reads right-roll and saturates the bubble at ±25°', () => {
+    // 20° sağa yatış: ax = g·sin20 ≈ 3.35, az = g·cos20 ≈ 9.22.
+    const l = levelFromAccel({ x: 3.35, y: 0, z: 9.22 });
+    expect(l.rollDeg).toBeCloseTo(20, 0);
+    expect(l.bubbleX).toBeCloseTo(0.8, 1);
+    // 40° yatış baloncuğu doyurur.
+    const sat = levelFromAccel({ x: 6.3, y: 0, z: 7.51 });
+    expect(Math.abs(sat.bubbleX)).toBe(1);
+  });
+});
+
+describe('crossedNorth', () => {
+  it('fires only on full-turn boundary crossings', () => {
+    expect(crossedNorth(359.7, 360.2)).toBe(true);
+    expect(crossedNorth(-0.2, 0.3)).toBe(true);
+    expect(crossedNorth(10, 20)).toBe(false);
+    expect(crossedNorth(350, 355)).toBe(false);
+  });
+});
+
+describe('poseStep', () => {
+  it('switches with hysteresis, never flaps at the boundary', () => {
+    expect(poseStep('flat', 0.2)).toBe('upright');
+    expect(poseStep('flat', 0.5)).toBe('flat');
+    expect(poseStep('upright', 0.5)).toBe('upright');
+    expect(poseStep('upright', 0.7)).toBe('flat');
+  });
+});
+
+describe('headingFromRotationMatrix', () => {
+  /**
+   * Fiziksel tutarlı matris üretici: cihaz eksenleri R'nin SÜTUNLARIDIR.
+   * yaw φ (üst kenarın düz kerterizi) + pitch θ (üst kenarın yükselmesi).
+   *   sütun0 (sağ kenar)  = (1,0,0)
+   *   sütun1 (üst kenar)  = (sinφ·cosθ, cosφ·cosθ, sinθ)
+   *   sütun2 (ekran norm.)= (−sinφ·sinθ, cosφ·sinθ, cosθ)
+   */
+  const matrix = (yawDeg: number, pitchDeg: number): number[] => {
+    const p = (yawDeg * Math.PI) / 180;
+    const t = (pitchDeg * Math.PI) / 180;
+    const sp = Math.sin(p);
+    const cp = Math.cos(p);
+    const st = Math.sin(t);
+    const ct = Math.cos(t);
+    return [
+      1, sp * ct, -sp * st,
+      0, cp * ct, cp * st,
+      0, st, ct,
+    ];
+  };
+
+  it('reads flat yaw from the top edge (mirror-asymmetric pair)', () => {
+    // Düz, üst kenar kuzeyde: R = I → 0°.
+    expect(headingFromRotationMatrix([1, 0, 0, 0, 1, 0, 0, 0, 1], 'flat').heading).toBeCloseTo(0);
+    // Düz, saat yönünde 90°: üst kenar doğuda → 90° (ayna 270° verirdi).
+    const east = headingFromRotationMatrix([0, 1, 0, -1, 0, 0, 0, 0, 1], 'flat');
+    expect(east.heading).toBeCloseTo(90);
+    expect(east.pose).toBe('flat');
+    // Düz, 270°: üst kenar batıda → 270°.
+    expect(
+      headingFromRotationMatrix([0, -1, 0, 1, 0, 0, 0, 0, 1], 'flat').heading,
+    ).toBeCloseTo(270);
+  });
+
+  it('reads gaze direction when upright (portrait)', () => {
+    // Dik portre, kuzeye bakış: ekran normali güneye → 0°.
+    const n = headingFromRotationMatrix([1, 0, 0, 0, 0, -1, 0, 1, 0], 'flat');
+    expect(n.pose).toBe('upright');
+    expect(n.heading).toBeCloseTo(0);
+    // Dik portre, doğuya bakış: ekran normali batıya → 90°.
+    expect(
+      headingFromRotationMatrix([0, 0, -1, -1, 0, 0, 0, 1, 0], 'upright').heading,
+    ).toBeCloseTo(90);
+  });
+
+  it('holds the tilt-compensated reading across the whole usable tilt range', () => {
+    // v2 regresyonu: |R[8]|<0.4 (θ>66°) altında bakışa ANALTILIRDI ve okuma
+    // ~90° kayıyordu ("telefonu döndürünce kadran alakasız yerde duruyor").
+    // v3: 0–75° eğimde okuma BİREBİR düz kerteriz (ölçülen en büyük adım 0.0000°).
+    for (const yaw of [0, 45, 90, 200, 330]) {
+      const flat = headingFromRotationMatrix(matrix(yaw, 0), 'flat').heading;
+      for (let pitch = 0; pitch <= 75; pitch += 1) {
+        const h = headingFromRotationMatrix(matrix(yaw, pitch), 'flat').heading;
+        expect(Math.abs(shortestDelta(flat, h))).toBeLessThan(0.01);
+      }
+    }
+  });
+
+  it('ignores the previous pose in the math (v2 hysteresis is display-only)', () => {
+    // Aynı matris, iki farklı önceki poz: v2'de 90° fark ederdi.
+    for (let pitch = 0; pitch <= 75; pitch += 5) {
+      const a = headingFromRotationMatrix(matrix(45, pitch), 'flat').heading;
+      const b = headingFromRotationMatrix(matrix(45, pitch), 'upright').heading;
+      expect(a).toBeCloseTo(b);
+    }
+  });
+
+  it('hands over to the gaze convention only when the top edge dies', () => {
+    // Üst kenar dikey (90° eğim) → saf bakış sözleşmesi.
+    // yaw=45: üst kenarın düz kerterizi 45°, ekranın baktığı yön 135°.
+    expect(headingFromRotationMatrix(matrix(45, 90), 'flat').heading).toBeCloseTo(135);
+    // yaw=90'da iki sözleşme örtüşür → okuma hep 90° kalır.
+    for (let pitch = 0; pitch <= 90; pitch += 5) {
+      expect(headingFromRotationMatrix(matrix(90, pitch), 'flat').heading).toBeCloseTo(90);
+    }
+  });
+
+  it('never flips sign when the two conventions are antiparallel (yaw 0)', () => {
+    // Üst kenar tam kuzeyde: iki sözleşme antiparalel. Geniş harman bandı
+    // burada 180° sıçrama yapıyordu; dar bant onu 78° bandına kadar öteler.
+    for (let pitch = 0; pitch <= 75; pitch += 1) {
+      expect(headingFromRotationMatrix(matrix(0, pitch), 'flat').heading).toBeCloseTo(0);
+    }
+  });
+});
+
+describe('applyUserOffset / clampUserOffset', () => {
+  it('shifts the magnetic heading and wraps', () => {
+    expect(applyUserOffset(350, 7)).toBeCloseTo(357);
+    expect(applyUserOffset(5, -7)).toBeCloseTo(358);
+    expect(applyUserOffset(180, 0)).toBeCloseTo(180);
+  });
+
+  it('clamps to the supported range', () => {
+    expect(applyUserOffset(0, 999)).toBeCloseTo(USER_OFFSET_LIMIT_DEG);
+    // Çıktı daima [0,360) sarılmış açıdır: −20° → 340°.
+    expect(applyUserOffset(0, -999)).toBeCloseTo(360 - USER_OFFSET_LIMIT_DEG);
+    expect(clampUserOffset(3.4)).toBe(3);
+    expect(clampUserOffset(Number.NaN)).toBe(0);
+    expect(clampUserOffset(1e9)).toBe(USER_OFFSET_LIMIT_DEG);
+  });
+
+  it('composes with declination in the documented order (offset → declination)', () => {
+    const mag = 344;
+    const biased = applyUserOffset(mag, 7);
+    expect(applyDeclination(biased, 6)).toBeCloseTo(357);
+  });
+
+  it('makes magnetic → true visibly different (regression: toggle did nothing)', () => {
+    // Kullanıcı raporu: "Gerçek"e basınca kadran hiç oynamıyordu. Sapma
+    // uygulanmadığında iki mod BİREBİR aynı okumayı vermeli — test bunu
+    // tersine çevirir: doğu-pozitif sapma okumayı doğuya kaydırır.
+    const mag = 25;
+    const magnetic = mag;
+    const trueNorth = applyDeclination(mag, 6);
+    expect(trueNorth).toBeCloseTo(31);
+    expect(trueNorth).not.toBeCloseTo(magnetic);
+    // Batı-pozitif sapma batıya kaydırır (işaret yönü testi).
+    expect(applyDeclination(25, -6)).toBeCloseTo(19);
+    // Sarma sınırında da fark korunur (350 + 6 = 356, 355 + 6 = 1).
+    expect(applyDeclination(355, 6)).toBeCloseTo(1);
+    expect(Math.abs(applyDeclination(355, 6) - 355)).toBeGreaterThan(5);
+  });
+});
+
+describe('isLevelReading', () => {
+  it('accepts small tilt, rejects visible tilt', () => {
+    expect(isLevelReading(1, 1)).toBe(true);
+    expect(isLevelReading(0, 0)).toBe(true);
+    expect(isLevelReading(3, 0)).toBe(false);
+    expect(isLevelReading(0, -5)).toBe(false);
   });
 });

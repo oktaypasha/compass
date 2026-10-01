@@ -1,16 +1,88 @@
 {
   "app": {
-    "title": "Pusula"
+    "title": "Mergen Compass"
   },
-  "compass": {
-    "heading": "{{deg}}°",
-    "calibrating": "Doğruluk düşük — telefonu 8 çizer gibi sallayın",
-    "simulated": "Simülasyon modu (sensör yok)",
-    "levelHint": "En iyi sonuç için telefonu düz tutun",
-    "accuracy": "Doğruluk: {{level}}"
+  "menu": {
+    "open": "Menüyü aç",
+    "compass": "Pusula",
+    "settings": "Ayarlar",
+    "language": "Dil",
+    "theme": "Tema",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Şartlar ve Koşullar",
+    "close": "Menüyü kapat"
+  },
+  "theme": {
+    "system": "Sistem",
+    "light": "Açık",
+    "dark": "Koyu"
   },
   "settings": {
-    "language": "Dil",
-    "trueNorth": "Gerçek kuzey (yakında)"
+    "title": "Ayarlar",
+    "demoMode": "Demo modu",
+    "demoModeHint": "Yalnızca tanıtım amacıyla sahte bir yön gösterir. Açıkken gerçek pusula okumaları durur.",
+    "demoOn": "Açık",
+    "demoOff": "Kapalı",
+    "northReference": "Kuzey referansı",
+    "northMagnetic": "Manyetik kuzey",
+    "northTrue": "Gerçek kuzey",
+    "northHint": "Gerçek kuzey, yerel manyetik sapmayı ekler. Konum gerekir; konum yoksa aşağıdan elle girin.",
+    "offsetTitle": "Manyetik ofset (cihaz hatası)",
+    "offsetHint": "Telefonun kendi mıknatıs hatasını düzeltir. 8 çizer gibi sallayın, fiziksel pusulayla hizalayın, sonra buradan ayarlayın.",
+    "declinationTitle": "Sapma (gerçek kuzey)",
+    "declinationAuto": "Otomatik sapma: {{value}} — elle girilen değer kullanılmıyor.",
+    "declinationManualHint": "Konum alınamazsa elle girin. Türkiye yaklaşık +4…+7° doğu.",
+    "reset": "Sıfırla",
+    "version": "Sürüm {{version}}"
+  },
+  "sun": {
+    "sunrise": "Gün doğumu",
+    "sunset": "Gün batımı"
+  },
+  "location": {
+    "locating": "Konum alınıyor…",
+    "denied": "Konum izni verilmedi",
+    "unavailable": "Konum alınamadı — açık alanda deneyin",
+    "waiting": "Konum bekleniyor…",
+    "retry": "Tekrar dene",
+    "share": "Konumu paylaş",
+    "shareTitle": "Konum",
+    "openMap": "Haritada aç"
+  },
+  "compass": {
+    "simulated": "DEMO MODU — sahte yön gösterimi, gerçek ölçüm değildir",
+    "noMagnetometerTitle": "Bu cihazda pusula yok",
+    "noMagnetometerBody": "Bu telefonda manyetometre bulunmadığı için yön ölçülemez. Bu bir uygulama hatası değil, donanımın kendi sınırıdır.",
+    "noMagnetometerStillWorks": "Su terazisi, konum ve gün doğumu/batımı bilgileri çalışmaya devam eder.",
+    "levelHint": "En iyi sonuç için telefonu düz tutun",
+    "accuracy": "Doğruluk: {{level}}",
+    "declination": "Sapma: {{value}}",
+    "declinationEast": "{{value}}°D",
+    "declinationWest": "{{value}}°B",
+    "declinationNoFix": "Gerçek kuzey için konum gerekli",
+    "declinationCached": " (son bilinen)",
+    "interference": "Manyetik parazit — metal ve mıknatıslardan uzaklaşın",
+    "suspectField": "Alan zayıf veya güçlü — okuma kayabilir",
+    "sourceSystem": "Sistem sensörü",
+    "sourceManual": "Uygulama füzyonu",
+    "figureEight": "8 çizer gibi sallayarak kalibre edin",
+    "bubbleLevel": "Su terazisi",
+    "poseFlat": "Tutuş: düz",
+    "poseUpright": "Tutuş: dik",
+    "directions": {
+      "n": "Kuzey",
+      "ne": "Kuzeydoğu",
+      "e": "Doğu",
+      "se": "Güneydoğu",
+      "s": "Güney",
+      "sw": "Güneybatı",
+      "w": "Batı",
+      "nw": "Kuzeybatı"
+    }
+  },
+  "legal": {
+    "privacyTitle": "Gizlilik Politikası",
+    "termsTitle": "Şartlar ve Koşullar",
+    "pending": "Sözleşme yakında buraya eklenecek."
   }
 }

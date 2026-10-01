@@ -11,8 +11,17 @@ export const compassMotion = {
   sampleIntervalMs: 20,
   /** Manyetometre düzeltme kazancı (complementary filter α). */
   fusionAlpha: 0.05,
-  /** Son yumuşatma (sin/cos EMA β). Küçük = daha smooth, daha gecikmeli. */
-  emaAlpha: 0.12,
-  /** Çıktı ölü bandı (derece): altındaki oynamalar UI'ya yazılmaz — 1-2° zıplamayı öldürür. */
-  deadbandDeg: 0.4,
+  /**
+   * Son yumuşatma (sin/cos EMA β). v3: 0.12 → 0.18. Küçük β daha yumuşak ama
+   * gecikmeli (telefon döndürünce "ağır" hissedilir); 0.18 ~0.2 sn zaman sabitiyle
+   * hem akıcı hem de titremez. Değeri DÜŞÜRME: sin/cos uzayında olduğu için
+   * 359°→0° sallanması yine de yok.
+   */
+  emaAlpha: 0.18,
+  /**
+   * Çıktı ölü bandı (derece). v3: 0.4 → 0.15. 0.4° bandı küçük dönüşleri
+   * yutuyordu ("telefonu oynatınca kadran tepki vermiyor" şikâyeti); 0.15°
+   * hâlâ 1/4 hücre altı oynamayı UI'ya yazdırmaz ama her hareketi geçirir.
+   */
+  deadbandDeg: 0.15,
 } as const;

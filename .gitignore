@@ -18,6 +18,39 @@ expo-env.d.ts
 *.key
 *.mobileprovision
 
+# ⚠️ Release imza anahtarları ASLA commit edilmemeli.
+# `*.jks` yukarıda var ama bu projede anahtar `.keystore` uzantısında
+# (mapcompass-release.keystore) ve kök dizinde duruyordu: Git'e sızarsa imza
+# anahtarı kalıcı olarak ele geçer ve mağaza yüklemeleri başka birine
+# verilemez. Anahtarlar `ANDROID_KEYSTORE_*` ortam değişkenleriyle alınmalı.
+*.keystore
+
+# Expo local modüllerinin (modules/) derleme çıktıları.
+# ⚠️ `/android` ve `/ios` satırları yalnızca depo KÖKÜ içindir; `modules/compass-
+# sensors/android/` altındaki build klasörünü kapsamaz. Gradle'in .transforms
+# altında ürettiği dex dosya yolları Windows'un 260 karakterlik sınırını
+# aşıyor ve git `error: Filename too long` ile tüm commit'i düşürüyordu:
+#   error: lstat(".../transformed/bundleLibRuntimeToDirDebug_dex/expo/modules/
+#   compasssensors/CompassSensorsModule$definition$lambda$7$$inlined$Function$1.dex")
+#   fatal: Unable to process path ... Filename too long
+modules/*/android/build/
+modules/*/ios/build/
+modules/*/android/.cxx/
+modules/*/android/.gradle/
+modules/*/android/local.properties
+modules/*/node_modules/
+modules/*/.expo/
+
+# Tek seferlik düzeltme betikleri (29 Eylül).
+# Bunlar `package.json` script'lerine bağlı DEĞİL ve artık var olmayan özellikleri
+# (16 yön tablosu, eski derece tablosu) geri yazacak şekilde yazıldılar.
+# Yanlışlıkla çalıştırılıp sadece i18n JSON'ları bozarlar. Sürüm kontrolüne
+# girmezler; gerçekten gerekirse ilgili .tsx dosyası değiştirilir.
+scripts/add-cardinals.cjs
+scripts/add-cardinals-16.cjs
+scripts/add-directions.cjs
+scripts/add-menu-open.cjs
+
 # Metro
 .metro-health-check*
 

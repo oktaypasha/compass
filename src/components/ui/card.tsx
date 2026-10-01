@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
-import { View, type StyleProp, type ViewStyle } from 'react-native';
-import { colors, radius, shadows, spacing } from '../../theme';
+import { useMemo } from 'react';
+import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { radius, shadows, spacing, useTheme } from '../../theme';
 
 interface Props {
   children: ReactNode;
@@ -9,20 +10,19 @@ interface Props {
 
 /** Merkezi kart — içerik için `children` alır (composition over configuration). */
 export function Card({ children, style }: Props) {
-  return (
-    <View
-      style={[
-        {
+  const { colors } = useTheme();
+  const themed = useMemo(
+    () =>
+      StyleSheet.create({
+        base: {
           backgroundColor: colors.secondarySystemBackground,
           borderRadius: radius.lg,
           borderCurve: 'continuous',
           padding: spacing.md,
           boxShadow: shadows.card,
         },
-        style,
-      ]}
-    >
-      {children}
-    </View>
+      }).base,
+    [colors],
   );
+  return <View style={[themed, style]}>{children}</View>;
 }

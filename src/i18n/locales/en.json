@@ -1,16 +1,88 @@
 {
   "app": {
-    "title": "Compass"
+    "title": "Mergen Compass"
   },
-  "compass": {
-    "heading": "{{deg}}°",
-    "calibrating": "Low accuracy — wave the phone in a figure 8",
-    "simulated": "Simulation mode (no sensor)",
-    "levelHint": "Hold the phone flat for best results",
-    "accuracy": "Accuracy: {{level}}"
+  "menu": {
+    "open": "Open menu",
+    "compass": "Compass",
+    "settings": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "close": "Close menu"
+  },
+  "theme": {
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
   },
   "settings": {
-    "language": "Language",
-    "trueNorth": "True north (soon)"
+    "title": "Settings",
+    "demoMode": "Demo mode",
+    "demoModeHint": "Shows a simulated heading for demonstration only. Real compass readings are off while this is on.",
+    "demoOn": "On",
+    "demoOff": "Off",
+    "northReference": "North reference",
+    "northMagnetic": "Magnetic north",
+    "northTrue": "True north",
+    "northHint": "True north adds the local magnetic declination. It needs a location fix; without one, set it by hand below.",
+    "offsetTitle": "Magnetic offset (device bias)",
+    "offsetHint": "Corrects the phone's own magnetometer bias. Wave a figure 8, align with a physical compass, then trim here.",
+    "declinationTitle": "Declination (true north)",
+    "declinationAuto": "Automatic declination: {{value}} — manual value unused.",
+    "declinationManualHint": "If there is no fix, set it by hand. Türkiye is roughly +4…+7° east.",
+    "reset": "Reset",
+    "version": "Version {{version}}"
+  },
+  "sun": {
+    "sunrise": "Sunrise",
+    "sunset": "Sunset"
+  },
+  "location": {
+    "locating": "Getting location…",
+    "denied": "Location permission denied",
+    "unavailable": "No location fix — try outdoors",
+    "waiting": "Waiting for location…",
+    "retry": "Retry",
+    "share": "Share location",
+    "shareTitle": "Location",
+    "openMap": "Open map"
+  },
+  "compass": {
+    "simulated": "DEMO MODE — simulated heading, not a real measurement",
+    "noMagnetometerTitle": "No compass in this device",
+    "noMagnetometerBody": "This phone has no magnetometer, so it cannot measure direction. That is a hardware limitation, not an app error.",
+    "noMagnetometerStillWorks": "The level, location and sunrise/sunset readings below still work.",
+    "levelHint": "Hold the phone flat for best results",
+    "accuracy": "Accuracy: {{level}}",
+    "declination": "Declination: {{value}}",
+    "declinationEast": "{{value}}°E",
+    "declinationWest": "{{value}}°W",
+    "declinationNoFix": "True north needs a location fix",
+    "declinationCached": " (last known)",
+    "interference": "Magnetic interference — move away from metal and magnets",
+    "suspectField": "Field weak or strong — the reading may drift",
+    "sourceSystem": "System sensor",
+    "sourceManual": "In-app fusion",
+    "figureEight": "Calibrate by waving the phone in a figure 8",
+    "bubbleLevel": "Bubble level",
+    "poseFlat": "Grip: flat",
+    "poseUpright": "Grip: upright",
+    "directions": {
+      "n": "North",
+      "ne": "North-East",
+      "e": "East",
+      "se": "South-East",
+      "s": "South",
+      "sw": "South-West",
+      "w": "West",
+      "nw": "North-West"
+    }
+  },
+  "legal": {
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms & Conditions",
+    "pending": "A contract will be added here soon."
   }
 }

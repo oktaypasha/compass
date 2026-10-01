@@ -1,0 +1,88 @@
+{
+  "app": {
+    "title": "Mergen Compass"
+  },
+  "menu": {
+    "open": "Abrir menú",
+    "compass": "Brújula",
+    "settings": "Ajustes",
+    "language": "Idioma",
+    "theme": "Tema",
+    "privacy": "Política de privacidad",
+    "terms": "Términos y condiciones",
+    "close": "Cerrar el menú"
+  },
+  "theme": {
+    "system": "Sistema",
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "demoMode": "Modo demo",
+    "demoModeHint": "Muestra una dirección simulada solo con fines de demostración. Con esto activado se detienen las lecturas reales de la brújula.",
+    "demoOn": "Activado",
+    "demoOff": "Desactivado",
+    "northReference": "Referencia norte",
+    "northMagnetic": "Norte magnético",
+    "northTrue": "Norte verdadero",
+    "northHint": "El norte verdadero añade la declinación magnética local. Necesita la ubicación; si no la hay, introdúcela abajo a mano.",
+    "offsetTitle": "Desvío magnético (sesgo del dispositivo)",
+    "offsetHint": "Corrige el sesgo del magnetómetro del teléfono. Haz un ocho, alínéalo con una brújula física y ajústalo aquí.",
+    "declinationTitle": "Declinación (norte verdadero)",
+    "declinationAuto": "Declinación automática: {{value}} — el valor manual no se usa.",
+    "declinationManualHint": "Si no hay ubicación, introdúcela a mano. Turquía está a unos +4…+7° al este.",
+    "reset": "Restablecer",
+    "version": "Versión {{version}}"
+  },
+  "sun": {
+    "sunrise": "Amanecer",
+    "sunset": "Atardecer"
+  },
+  "location": {
+    "locating": "Obteniendo la ubicación…",
+    "denied": "Permiso de ubicación denegado",
+    "unavailable": "Sin ubicación: prueba al aire libre",
+    "waiting": "Esperando la ubicación…",
+    "retry": "Reintentar",
+    "share": "Compartir ubicación",
+    "shareTitle": "Ubicación",
+    "openMap": "Abrir en el mapa"
+  },
+  "compass": {
+    "simulated": "MODO DEMO — dirección simulada, no es una medición real",
+    "noMagnetometerTitle": "Este dispositivo no tiene brújula",
+    "noMagnetometerBody": "Este teléfono no tiene magnetómetro, por lo que no puede medir la dirección. Es una limitación del hardware, no un error de la app.",
+    "noMagnetometerStillWorks": "El nivel, la ubicación y el amanecer/atardecer siguen funcionando.",
+    "levelHint": "Mantén el teléfono plano para obtener mejores resultados",
+    "accuracy": "Precisión: {{level}}",
+    "declination": "Declinación: {{value}}",
+    "declinationEast": "{{value}}°E",
+    "declinationWest": "{{value}}°O",
+    "declinationNoFix": "El norte verdadero necesita la ubicación",
+    "declinationCached": " (último conocido)",
+    "interference": "Interferencia magnética: aléjate de metales e imanes",
+    "suspectField": "Campo débil o fuerte: la lectura puede variar",
+    "sourceSystem": "Sensor del sistema",
+    "sourceManual": "Fusión en la app",
+    "figureEight": "Calibra agitando el teléfono en un ocho",
+    "bubbleLevel": "Nivel de burbuja",
+    "poseFlat": "Agarre: plano",
+    "poseUpright": "Agarre: vertical",
+    "directions": {
+      "n": "Norte",
+      "ne": "Noreste",
+      "e": "Este",
+      "se": "Sureste",
+      "s": "Sur",
+      "sw": "Suroeste",
+      "w": "Oeste",
+      "nw": "Noroeste"
+    }
+  },
+  "legal": {
+    "privacyTitle": "Política de privacidad",
+    "termsTitle": "Términos y condiciones",
+    "pending": "Aquí se añadirá un contrato pronto."
+  }
+}
