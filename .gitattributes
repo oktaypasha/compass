@@ -1,0 +1,44 @@
+# Satır sonu normalizasyonu.
+#
+# Neden gerekli: `core.autocrlf=true` idi ve `.gitattributes` yoktu; bu yüzden
+# HER dosya için "LF will be replaced by CRLF" uyarısı basılıyordu. Depoda 66
+# dosya eklendiğinde bu 66 satırlık gürültü, gerçek uyarıları (uzun yol,
+# keystore sızıntısı) gizliyordu.
+#
+# Kural: depoda LF, çalışma alanında da LF. İki kişi farklı satır sonuyla aynı
+# dosyayı düzenleyip birbirinin diff'ini kirletmesin.
+* text=auto eol=lf
+
+# Windows batch/CMD dosyaları CRLF ZORUNLUDUR (cmd.exe LF'i yanlış yorumlar).
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Gradle wrapper'ı CRLF olmalı: gradlew.bat satır sonları bozulursa Gradle
+# "Could not start Gradle daemon" / "unrecognized option" hatası verir.
+gradlew text eol=crlf
+gradlew.bat text eol=crlf
+android/gradlew text eol=crlf
+android/gradlew.bat text eol=crlf
+
+# İkili dosyalar — asla çevrilmemeli.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.keystore binary
+*.jks binary
+*.apk binary
+*.aab binary
+*.so binary
+*.ttf binary
+*.otf binary
+
+# Kotlin/Swift kaynakları: satır sonu önemli değil ama tutarlılık için LF.
+*.kt text eol=lf
+*.kts text eol=lf
+*.swift text eol=lf
+*.m text eol=lf
+*.h text eol=lf
+*.gradle text eol=lf
